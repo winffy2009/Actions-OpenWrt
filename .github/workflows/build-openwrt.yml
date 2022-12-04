@@ -40,7 +40,8 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@main
-
+    - name: Setup Debug Session
+      uses: csexton/debugger-action@master
     - name: Initialization environment
       env:
         DEBIAN_FRONTEND: noninteractive
@@ -53,8 +54,6 @@ jobs:
         sudo timedatectl set-timezone "$TZ"
         sudo mkdir -p /workdir
         sudo chown $USER:$GROUPS /workdir
-    - name: Setup Debug Session
-      uses: csexton/debugger-action@master
     - name: Clone source code
       working-directory: /workdir
       run: |
@@ -89,8 +88,6 @@ jobs:
 #       env:
 #         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
 #         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-    - name: SSH connection to Actions <Tmate>
-      uses: csexton/debugger-action@master
     - name: Download package
       id: package
       run: |
